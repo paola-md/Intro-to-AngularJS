@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html ng-app="miApp"> <!-- Auto-arranca aplicación -->
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+
+        <title>Mi primera página con directivas de JS</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Mi primera página con directivas de AngularJS</h1>
+
+        <div ng-controller ="miCtrl">
+            <div  ng-repeat="alum in user.grupo">
+                <input type="text" ng-model="alum.nombre">
+                <p>{{alum.nombre|lowercase}}
+            </div>
+            <button class="btn btn-small" ng-click="add()">Agrega</button>
+
+
+
+        </div>
+
+        <script>
+            var app = angular.module('miApp', []);
+            app.controller('miCtrl', function ($scope) {
+                $scope.user = {
+                    grupo: [
+                    ]
+                };
+
+                $scope.add = function () {
+                    $scope.user.grupo.push({nombre: ''});
+                };
+
+            });
+        </script>
+
+
+
+
+    </body>
+</html>

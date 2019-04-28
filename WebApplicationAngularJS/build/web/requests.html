@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <title>Mi primera página con directivas de JS</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    
+    <body>
+        <h1>Ejemplo Request: Miembros del grupo</h1>
+
+        <div ng-app="serviceApp" ng-controller="serviceCtrl">
+            <h1>{{alumnos}}</h1>
+        </div>
+
+    <script type="text/javascript">
+        var app = angular.module('serviceApp', []);
+        app.controller('serviceCtrl', function ($scope, $http) {
+            $http({
+                method: 'GET',
+                url: 'prueba.html',
+            }).then(function success(response) {
+                $scope.alumnos = response.data;
+            }, function error(response) {
+            });
+        });
+    </script>
+    
+   </body>
+
+</html>

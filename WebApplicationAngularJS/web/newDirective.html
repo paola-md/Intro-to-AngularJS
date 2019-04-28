@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <body ng-app="miApp">
+
+    <nueva-dir></nueva-dir>
+
+    <script>
+        var app = angular.module("miApp", []);
+        app.directive("nuevaDir", function () {
+            return {
+                template:" <input ng-model='nombre'> <div> {{nombre|uppercase}}</div>"
+            };
+        });
+    </script>
+
+</body>
+</html>
