@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+    <script src="notifications.js"></script>
+
+    <title>Notificactions</title>
+</head>
+
+<body ng-app="notificationsApp" ng-controller="NotificationsListCtrl">
+    <div class="container">
+
+        <div class="row">
+            <div class="border border-info col-md-12">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h3 class="d-none d-sm-block">Notifications ({{notifications.length}})</h3>
+                        <h4 class="d-block d-sm-none">Notifications ({{notifications.length}})</h4>
+                    </div>
+                    <div class="col-md-4 offset-md-4">
+                        <button type="button" class="d-none d-sm-block btn btn-warning" ng-click="readAll()">Read
+                            all</button>
+                        <button type="button" class="d-block d-sm-none btn btn-warning btn-sm" ng-click="readAll()">Read
+                            all</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" data-ng-init="getMainNotifications()">
+            <div class="border border-info col-md-12">
+                <h3 class="d-none d-sm-block">Messages</h3>
+                <h4 class="d-block d-sm-none">Messages</h4>
+                <div class="card" ng-repeat="notification in notifications">
+                    <div class="card-body">
+                        <h5 class="card-title">{{notification.header | uppercase}} - {{notification.email | lowercase}}
+                        </h5>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <p class="card-text">{{notification.body}}</p>
+                            </div>
+                            <div class="col-md-2">
+                                <p class="card-text">{{notification.timestamp | date:"dd/MM/yyyy 'at' HH:mm:ss:sss"}}
+                                </p>
+                            </div>
+                            <div class="col-md-1">
+                                <input type="checkbox" name="read" ng-change="goTo('read', $index)"
+                                    ng-model="notification.isRead">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="border border-info col-md-12">
+                <div class="row">
+                    <div class="col-md-3">
+                        <button type="button" class="d-none d-sm-block btn btn-primary" ng-click="getNotification()">Send
+                            notification</button>
+                        <button type="button" class="d-block d-sm-none btn btn-primary btn-sm" ng-click="getNotification()">Send
+                            notification</button>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="custom-select mr-sm-2" ng-model="method">
+                            <option value="GET">GET</option>
+                            <option value="POST">POST</option>
+                            <option value="PUT">PUT</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="border border-info col-md-12">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h3 class="d-none d-sm-block">Read ({{read.length}})</h3>
+                        <h4 class="d-block d-sm-none">Read ({{read.length}})</h4>
+                    </div>
+                    <div class="col-md-4 offset-md-4">
+                        <button type="button" class="d-none d-sm-block btn btn-warning" ng-click="unReadAll()">Un-Read
+                            all</button>
+                        <button type="button" class="d-block d-sm-none btn btn-warning btn-sm"
+                            ng-click="unReadAll()">Un-Read all</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="border border-info col-md-12">
+                <h3 class="d-none d-sm-block">Messages</h3>
+                <h4 class="d-block d-sm-none">Messages</h4>
+                <div class="card" ng-repeat="notification in read">
+                    <div class="card-body">
+                        <h5 class="card-title">{{notification.header | uppercase}} - {{notification.email | lowercase}}
+                        </h5>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <p class="card-text">{{notification.body}}</p>
+                            </div>
+                            <div class="col-md-2">
+                                <p class="card-text">{{notification.timestamp | date:"dd/MM/yyyy 'at' HH:mm:ss:sss"}}
+                                </p>
+                            </div>
+                            <div class="col-md-1">
+                                <input type="checkbox" name="read" ng-change="goTo('notifications', $index)"
+                                    ng-model="notification.isRead">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
